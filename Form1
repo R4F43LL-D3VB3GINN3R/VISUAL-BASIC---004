@@ -1,0 +1,319 @@
+Form1
+
+Imports MySql.Data.MySqlClient
+Public Class Form1
+
+    Dim conn As MySqlConnection
+    Dim commandas As MySqlCommand
+
+    ''Essa função chamada Validarhost recebe uma ConnectionString como parâmetro e verifica se ela contém a string "server=127.0.0.1".
+    ''Se essa parte estiver presente na ConnectionString, a função retorna True, caso contrário, retorna False."
+    ''O mesmo serve para as outras partes da String.
+
+    Private Function ValidarHost(ByVal connString As String) As Boolean
+        Return connString.Contains("server=127.0.0.1")
+    End Function
+    Private Function ValidarUserID(ByVal connString As String) As Boolean
+        Return connString.Contains("userid=root")
+    End Function
+    Private Function ValidarPassword(ByVal connString As String) As Boolean
+        Return connString.Contains("password=''")
+    End Function
+    Private Function ValidarDatabase(ByVal connString As String) As Boolean
+        Return connString.Contains("database=DB_AI")
+    End Function
+    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
+        End
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+
+        PictureBox1.Hide()
+
+        Dim connectionString As String = "server=127.0.0.1;userid=root;password='';database=DB_AI"
+
+        conn = New MySqlConnection
+        conn.ConnectionString = "server=127.0.0.1;userid=root;password='';database=DB_AI"
+
+        If Not ValidarHost(connectionString) Then
+            MsgBox("Unable to connect to any of the specified MySQL hosts.", MsgBoxStyle.Exclamation, "Erro na Conexão")
+            Return
+        ElseIf Not ValidarUserID(connectionString) Then
+            MsgBox("Authentication to host. 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root' 'localhost' (using passord: NO)", MsgBoxStyle.Exclamation, "Erro na Conexão")
+            Return
+        ElseIf Not ValidarPassword(connectionString) Then
+            MsgBox("Authentication to host. 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root' 'localhost' (using passord: YES)", MsgBoxStyle.Exclamation, "Erro na Conexão")
+            Return
+        ElseIf Not ValidarDatabase(connectionString) Then
+            MsgBox("Authentication to host. 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknow database mysql", MsgBoxStyle.Exclamation, "Erro na Conexão")
+            Return
+        Else
+
+            Try
+                conn.Open()
+
+                Dim table As New DataTable
+                Dim adappter As New MySqlDataAdapter("Select * From TAB_DEVELOPERS", conn)
+                adappter.Fill(table)
+                DataGridView1.DataSource = table
+
+                conn.Close()
+
+            Catch ex As Exception
+                MsgBox(ex.Message)
+                conn.Close()
+            End Try
+        End If
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+
+        PictureBox1.Hide()
+
+        Dim connectionString As String = "server=127.0.0.1;userid=root;password='';database=DB_AI"
+
+        conn = New MySqlConnection
+        conn.ConnectionString = "server=127.0.0.1;userid=root;password='';database=DB_AI"
+
+        If Not ValidarHost(connectionString) Then
+            MsgBox("Unable to connect to any of the specified MySQL hosts.", MsgBoxStyle.Exclamation, "Erro na Conexão")
+            Return
+        ElseIf Not ValidarUserID(connectionString) Then
+            MsgBox("Authentication to host. 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root' 'localhost' (using passord: NO)", MsgBoxStyle.Exclamation, "Erro na Conexão")
+            Return
+        ElseIf Not ValidarPassword(connectionString) Then
+            MsgBox("Authentication to host. 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root' 'localhost' (using passord: YES)", MsgBoxStyle.Exclamation, "Erro na Conexão")
+            Return
+        ElseIf Not ValidarDatabase(connectionString) Then
+            MsgBox("Authentication to host. 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknow database mysql", MsgBoxStyle.Exclamation, "Erro na Conexão")
+            Return
+        Else
+
+            Try
+                conn.Open()
+
+                Dim table As New DataTable
+                Dim adappter As New MySqlDataAdapter("Select * From TAB_AI_TOOLS", conn)
+                adappter.Fill(table)
+                DataGridView1.DataSource = table
+
+                conn.Close()
+
+            Catch ex As Exception
+                MsgBox(ex.Message)
+                conn.Close()
+            End Try
+        End If
+    End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+
+        PictureBox1.Hide()
+
+        Dim connectionString As String = "server=127.0.0.1;userid=root;password='';database=DB_AI"
+
+        conn = New MySqlConnection
+        conn.ConnectionString = "server=127.0.0.1;userid=root;password='';database=DB_AI"
+
+        If Not ValidarHost(connectionString) Then
+            MsgBox("Unable to connect to any of the specified MySQL hosts.", MsgBoxStyle.Exclamation, "Erro na Conexão")
+            Return
+        ElseIf Not ValidarUserID(connectionString) Then
+            MsgBox("Authentication to host. 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root' 'localhost' (using passord: NO)", MsgBoxStyle.Exclamation, "Erro na Conexão")
+            Return
+        ElseIf Not ValidarPassword(connectionString) Then
+            MsgBox("Authentication to host. 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root' 'localhost' (using passord: YES)", MsgBoxStyle.Exclamation, "Erro na Conexão")
+            Return
+        ElseIf Not ValidarDatabase(connectionString) Then
+            MsgBox("Authentication to host. 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknow database mysql", MsgBoxStyle.Exclamation, "Erro na Conexão")
+            Return
+        Else
+
+            Try
+                conn.Open()
+
+                Dim table As New DataTable
+                Dim adappter As New MySqlDataAdapter("Select * From TAB_USERRATING", conn)
+                adappter.Fill(table)
+                DataGridView1.DataSource = table
+
+                conn.Close()
+
+            Catch ex As Exception
+                MsgBox(ex.Message)
+                conn.Close()
+            End Try
+        End If
+    End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+
+        PictureBox1.Hide()
+
+        Dim connectionString As String = "server=127.0.0.1;userid=root;password='';database=DB_AI"
+
+        conn = New MySqlConnection
+        conn.ConnectionString = "server=127.0.0.1;userid=root;password='';database=DB_AI"
+
+        If Not ValidarHost(connectionString) Then
+            MsgBox("Unable to connect to any of the specified MySQL hosts.", MsgBoxStyle.Exclamation, "Erro na Conexão")
+            Return
+        ElseIf Not ValidarUserID(connectionString) Then
+            MsgBox("Authentication to host. 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root' 'localhost' (using passord: NO)", MsgBoxStyle.Exclamation, "Erro na Conexão")
+            Return
+        ElseIf Not ValidarPassword(connectionString) Then
+            MsgBox("Authentication to host. 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root' 'localhost' (using passord: YES)", MsgBoxStyle.Exclamation, "Erro na Conexão")
+            Return
+        ElseIf Not ValidarDatabase(connectionString) Then
+            MsgBox("Authentication to host. 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknow database mysql", MsgBoxStyle.Exclamation, "Erro na Conexão")
+            Return
+        Else
+
+            Try
+                conn.Open()
+
+                Dim table As New DataTable
+                Dim adappter As New MySqlDataAdapter("Select * From TAB_USERS", conn)
+                adappter.Fill(table)
+                DataGridView1.DataSource = table
+
+                conn.Close()
+
+            Catch ex As Exception
+                MsgBox(ex.Message)
+                conn.Close()
+            End Try
+        End If
+    End Sub
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+
+        PictureBox1.Hide()
+
+        Dim connectionString As String = "server=127.0.0.1;userid=root;password='';database=DB_AI"
+
+        conn = New MySqlConnection
+        conn.ConnectionString = "server=127.0.0.1;userid=root;password='';database=DB_AI"
+
+        If Not ValidarHost(connectionString) Then
+            MsgBox("Unable to connect to any of the specified MySQL hosts.", MsgBoxStyle.Exclamation, "Erro na Conexão")
+            Return
+        ElseIf Not ValidarUserID(connectionString) Then
+            MsgBox("Authentication to host. 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root' 'localhost' (using passord: NO)", MsgBoxStyle.Exclamation, "Erro na Conexão")
+            Return
+        ElseIf Not ValidarPassword(connectionString) Then
+            MsgBox("Authentication to host. 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root' 'localhost' (using passord: YES)", MsgBoxStyle.Exclamation, "Erro na Conexão")
+            Return
+        ElseIf Not ValidarDatabase(connectionString) Then
+            MsgBox("Authentication to host. 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknow database mysql", MsgBoxStyle.Exclamation, "Erro na Conexão")
+            Return
+        Else
+
+            Try
+                conn.Open()
+
+                Dim table As New DataTable
+                Dim adappter As New MySqlDataAdapter("Select * From TAB_FEATURES", conn)
+                adappter.Fill(table)
+                DataGridView1.DataSource = table
+
+                conn.Close()
+
+            Catch ex As Exception
+                MsgBox(ex.Message)
+                conn.Close()
+            End Try
+        End If
+    End Sub
+
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+
+        PictureBox1.Hide()
+
+        Dim connectionString As String = "server=127.0.0.1;userid=root;password='';database=DB_AI"
+
+        conn = New MySqlConnection
+        conn.ConnectionString = "server=127.0.0.1;userid=root;password='';database=DB_AI"
+
+        If Not ValidarHost(connectionString) Then
+            MsgBox("Unable to connect to any of the specified MySQL hosts.", MsgBoxStyle.Exclamation, "Erro na Conexão")
+            Return
+        ElseIf Not ValidarUserID(connectionString) Then
+            MsgBox("Authentication to host. 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root' 'localhost' (using passord: NO)", MsgBoxStyle.Exclamation, "Erro na Conexão")
+            Return
+        ElseIf Not ValidarPassword(connectionString) Then
+            MsgBox("Authentication to host. 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root' 'localhost' (using passord: YES)", MsgBoxStyle.Exclamation, "Erro na Conexão")
+            Return
+        ElseIf Not ValidarDatabase(connectionString) Then
+            MsgBox("Authentication to host. 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknow database mysql", MsgBoxStyle.Exclamation, "Erro na Conexão")
+            Return
+        Else
+
+            Try
+                conn.Open()
+
+                Dim table As New DataTable
+                Dim adappter As New MySqlDataAdapter("Select * From TAB_CATEGORIES", conn)
+                adappter.Fill(table)
+                DataGridView1.DataSource = table
+
+                conn.Close()
+
+            Catch ex As Exception
+                MsgBox(ex.Message)
+                conn.Close()
+            End Try
+        End If
+    End Sub
+
+    Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
+
+        PictureBox1.Hide()
+
+        Dim connectionString As String = "server=127.0.0.1;userid=root;password='';database=DB_AI"
+
+        conn = New MySqlConnection
+        conn.ConnectionString = "server=127.0.0.1;userid=root;password='';database=DB_AI"
+
+        If Not ValidarHost(connectionString) Then
+            MsgBox("Unable to connect to any of the specified MySQL hosts.", MsgBoxStyle.Exclamation, "Erro na Conexão")
+            Return
+        ElseIf Not ValidarUserID(connectionString) Then
+            MsgBox("Authentication to host. 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root' 'localhost' (using passord: NO)", MsgBoxStyle.Exclamation, "Erro na Conexão")
+            Return
+        ElseIf Not ValidarPassword(connectionString) Then
+            MsgBox("Authentication to host. 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Access denied for user 'root' 'localhost' (using passord: YES)", MsgBoxStyle.Exclamation, "Erro na Conexão")
+            Return
+        ElseIf Not ValidarDatabase(connectionString) Then
+            MsgBox("Authentication to host. 'localhost' for user 'root' using method 'mysql_native_password' failed with message: Unknow database mysql", MsgBoxStyle.Exclamation, "Erro na Conexão")
+            Return
+        Else
+
+            Try
+                conn.Open()
+
+                Dim query As String = InputBox("TYPE YOUR SQL QUERY")
+                If query <> "" Then
+                    Dim table As New DataTable
+                    Dim adapter As New MySqlDataAdapter(query, conn)
+                    adapter.Fill(table)
+                    DataGridView1.DataSource = table
+                Else
+                    MessageBox.Show("EMPTY QUERY")
+                End If
+
+                conn.Close()
+
+            Catch ex As Exception
+                MsgBox(ex.Message)
+                conn.Close()
+            End Try
+        End If
+    End Sub
+
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+        PictureBox1.Show()
+    End Sub
+
+
+End Class
