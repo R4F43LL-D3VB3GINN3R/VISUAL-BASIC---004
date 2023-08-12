@@ -1,0 +1,325 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Tempo de geração: 11-Ago-2023 às 17:50
+-- Versão do servidor: 10.4.28-MariaDB
+-- versão do PHP: 8.2.4
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Banco de dados: `db_ai`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `tab_ai_tools`
+--
+
+CREATE TABLE `tab_ai_tools` (
+  `ID` int(11) NOT NULL,
+  `NAME_T` varchar(50) DEFAULT NULL,
+  `ID_CAT` int(11) DEFAULT NULL,
+  `AI_DESCRIPTION` varchar(250) DEFAULT NULL,
+  `WEBSITE` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Extraindo dados da tabela `tab_ai_tools`
+--
+
+INSERT INTO `tab_ai_tools` (`ID`, `NAME_T`, `ID_CAT`, `AI_DESCRIPTION`, `WEBSITE`) VALUES
+(1, 'TensorFlow', 1, 'Library for machine learning and deep learning.', 'https://www.tensorflow.org'),
+(2, 'PyTorch', 1, 'Flexible library for machine learning and deep learning.', 'https://pytorch.org'),
+(3, 'scikit-learn', 1, 'Machine learning library in Python with various algorithms.', 'https://scikit-learn.org'),
+(4, 'Keras', 2, 'High-level interface for building and training neural networks.', 'https://keras.io'),
+(5, 'OpenCV', 3, 'Computer vision library for image and video processing.', 'https://opencv.org'),
+(6, 'NLTK', 4, 'Toolkit for natural language processing with various tools.', 'https://nltk.org'),
+(7, 'spaCy', 4, 'Efficient library for natural language processing.', 'https://spacy.io'),
+(8, 'Hugging Face Transformers', 4, 'Library with pre-trained models for natural language processing.', 'https://huggingface.co'),
+(9, 'XGBoost', 1, 'Gradient boosting algorithm for classification and regression.', 'https://xgboost.readthedocs.io'),
+(10, 'Microsoft Cognitive Toolkit (CNTK)', 2, 'Deep learning library developed by Microsoft.', 'https://www.microsoft.com/en-us/cognitive-toolkit');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `tab_categories`
+--
+
+CREATE TABLE `tab_categories` (
+  `ID` int(11) NOT NULL,
+  `NAME_C` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Extraindo dados da tabela `tab_categories`
+--
+
+INSERT INTO `tab_categories` (`ID`, `NAME_C`) VALUES
+(1, 'Machine Learning'),
+(2, 'Depp Leaning'),
+(3, ' Computer Vision'),
+(4, 'Natural Language Processing');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `tab_developers`
+--
+
+CREATE TABLE `tab_developers` (
+  `ID` int(11) NOT NULL,
+  `ID_TOOLS` int(11) DEFAULT NULL,
+  `DEV_NAME` varchar(50) DEFAULT NULL,
+  `DEV_WEBSITE` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Extraindo dados da tabela `tab_developers`
+--
+
+INSERT INTO `tab_developers` (`ID`, `ID_TOOLS`, `DEV_NAME`, `DEV_WEBSITE`) VALUES
+(1, 1, 'Google Brain', ' https://www.tensorflow.org/ '),
+(2, 2, 'Facebook AI Research', ' https://www.pytorch.org/ '),
+(3, 3, 'Various Contributors', ' https://www.scikit-learn.org/ '),
+(4, 4, 'François Chollet', ' https://www.keras.io/ '),
+(5, 5, 'OpenCV Contributors', ' https://www.opencv.org/ '),
+(6, 6, 'NLTK Project', ' https://www.nltk.org/ '),
+(7, 7, 'Explosion AI', ' https://www.spacy.io/ '),
+(8, 8, 'Hugging Face', ' https://www.huggingface.co/ '),
+(9, 9, 'Tianqi Chen', ' https://www.xgboost.readthedocs.io/ '),
+(10, 10, ' Microsoft', ' https://www.microsoft.com/en-us/cognitive-toolkit ');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `tab_features`
+--
+
+CREATE TABLE `tab_features` (
+  `ID` int(11) NOT NULL,
+  `ID_TOOLS` int(11) DEFAULT NULL,
+  `F_NAME` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Extraindo dados da tabela `tab_features`
+--
+
+INSERT INTO `tab_features` (`ID`, `ID_TOOLS`, `F_NAME`) VALUES
+(1, 1, 'GPU Support'),
+(2, 1, 'Distributed Computing'),
+(3, 2, 'Dynamic Computation Graph'),
+(4, 3, 'Ensemble Methods');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `tab_userrating`
+--
+
+CREATE TABLE `tab_userrating` (
+  `ID` int(11) NOT NULL,
+  `ID_USER` int(11) DEFAULT NULL,
+  `ID_TOOLS` int(11) DEFAULT NULL,
+  `RATING` tinyint(4) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Extraindo dados da tabela `tab_userrating`
+--
+
+INSERT INTO `tab_userrating` (`ID`, `ID_USER`, `ID_TOOLS`, `RATING`) VALUES
+(1, 1, 1, 5),
+(2, 3, 2, 4),
+(3, 4, 1, 4),
+(4, 2, 3, 5),
+(5, 1, 2, 5),
+(6, 1, 3, 3),
+(7, 1, 4, 4),
+(8, 1, 5, 3),
+(9, 1, 6, 2),
+(10, 1, 7, 5),
+(11, 1, 8, 4),
+(12, 1, 9, 1),
+(13, 1, 10, 3),
+(14, 2, 1, 4),
+(15, 2, 2, 3),
+(16, 2, 4, 2),
+(17, 2, 5, 1),
+(18, 2, 6, 3),
+(19, 2, 7, 5),
+(20, 2, 8, 4),
+(21, 2, 9, 5),
+(22, 2, 10, 4),
+(23, 3, 1, 4),
+(24, 3, 3, 3),
+(25, 3, 4, 5),
+(26, 3, 5, 2),
+(27, 3, 6, 5),
+(28, 3, 7, 3),
+(29, 3, 8, 5),
+(30, 3, 9, 4),
+(31, 3, 10, 3),
+(32, 4, 2, 2),
+(33, 4, 3, 3),
+(34, 4, 4, 5),
+(35, 4, 5, 2),
+(36, 4, 6, 4),
+(37, 4, 6, 5),
+(38, 4, 7, 3),
+(39, 4, 8, 2),
+(40, 4, 9, 4),
+(41, 4, 10, 5);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `tab_users`
+--
+
+CREATE TABLE `tab_users` (
+  `ID` int(11) NOT NULL,
+  `USERNAME` varchar(25) DEFAULT NULL,
+  `EMAIL` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Extraindo dados da tabela `tab_users`
+--
+
+INSERT INTO `tab_users` (`ID`, `USERNAME`, `EMAIL`) VALUES
+(1, 'User1', 'user1@gmail.com'),
+(2, 'User2', 'user2@gmail.com'),
+(3, 'User3', 'user3@gmail.com'),
+(4, 'User4', 'user4@gmail.com');
+
+--
+-- Índices para tabelas despejadas
+--
+
+--
+-- Índices para tabela `tab_ai_tools`
+--
+ALTER TABLE `tab_ai_tools`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `FK_ID_CAT` (`ID_CAT`);
+
+--
+-- Índices para tabela `tab_categories`
+--
+ALTER TABLE `tab_categories`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- Índices para tabela `tab_developers`
+--
+ALTER TABLE `tab_developers`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `FK_ID_TOOLS` (`ID_TOOLS`);
+
+--
+-- Índices para tabela `tab_features`
+--
+ALTER TABLE `tab_features`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `FK_ID_TOOLS3` (`ID_TOOLS`);
+
+--
+-- Índices para tabela `tab_userrating`
+--
+ALTER TABLE `tab_userrating`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `FK_ID_TOOLS2` (`ID_TOOLS`),
+  ADD KEY `FK_ID_USER` (`ID_USER`);
+
+--
+-- Índices para tabela `tab_users`
+--
+ALTER TABLE `tab_users`
+  ADD PRIMARY KEY (`ID`);
+
+--
+-- AUTO_INCREMENT de tabelas despejadas
+--
+
+--
+-- AUTO_INCREMENT de tabela `tab_ai_tools`
+--
+ALTER TABLE `tab_ai_tools`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT de tabela `tab_categories`
+--
+ALTER TABLE `tab_categories`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de tabela `tab_developers`
+--
+ALTER TABLE `tab_developers`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT de tabela `tab_features`
+--
+ALTER TABLE `tab_features`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de tabela `tab_userrating`
+--
+ALTER TABLE `tab_userrating`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+
+--
+-- AUTO_INCREMENT de tabela `tab_users`
+--
+ALTER TABLE `tab_users`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- Restrições para despejos de tabelas
+--
+
+--
+-- Limitadores para a tabela `tab_ai_tools`
+--
+ALTER TABLE `tab_ai_tools`
+  ADD CONSTRAINT `FK_ID_CAT` FOREIGN KEY (`ID_CAT`) REFERENCES `tab_categories` (`ID`);
+
+--
+-- Limitadores para a tabela `tab_developers`
+--
+ALTER TABLE `tab_developers`
+  ADD CONSTRAINT `FK_ID_TOOLS` FOREIGN KEY (`ID_TOOLS`) REFERENCES `tab_ai_tools` (`ID`);
+
+--
+-- Limitadores para a tabela `tab_features`
+--
+ALTER TABLE `tab_features`
+  ADD CONSTRAINT `FK_ID_TOOLS3` FOREIGN KEY (`ID_TOOLS`) REFERENCES `tab_ai_tools` (`ID`);
+
+--
+-- Limitadores para a tabela `tab_userrating`
+--
+ALTER TABLE `tab_userrating`
+  ADD CONSTRAINT `FK_ID_TOOLS2` FOREIGN KEY (`ID_TOOLS`) REFERENCES `tab_ai_tools` (`ID`),
+  ADD CONSTRAINT `FK_ID_USER` FOREIGN KEY (`ID_USER`) REFERENCES `tab_users` (`ID`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
