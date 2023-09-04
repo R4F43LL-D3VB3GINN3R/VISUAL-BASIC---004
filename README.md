@@ -1,5 +1,7 @@
 # VISUAL-BASIC---004
 
+dotnet add package MySql.Data --version 8.1.0
+
 VISUAL BASIC + PHPMYADMIN
 
 PHPMYADMIN
